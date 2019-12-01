@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TextViewActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/list_view"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true">
+
+        <TextView
+            android:id="@+id/txtOne"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:gravity="top|center"
+            android:text="TextView(显示框)"
+            android:textColor="#EA5246"
+            android:textStyle="bold|italic"
+            android:background="#000000"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/txtShadow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtOne"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:shadowColor="#F9F900"
+            android:shadowDx="10.0"
+            android:shadowDy="10.0"
+            android:shadowRadius="3.0"
+            android:text="带阴影的TextView"
+            android:textColor="#4A4AFF"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/txtTwo"
+            android:layout_width="200dp"
+            android:layout_height="64dp"
+            android:layout_below="@id/txtShadow"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:textSize="18sp"
+            android:background="@drawable/textview_radiuborder"
+            android:text="圆角边框的TextView" />
+
+        <TextView
+            android:id="@+id/txtUrl"
+            android:layout_width="200dp"
+            android:layout_height="64dp"
+            android:layout_below="@id/txtTwo"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:textSize="18sp"
+            android:background="@drawable/textview_radiuborder"
+            android:text="http://ww.baidu.com"
+            android:autoLink="web"/>
+
+        <Button
+            android:id="@+id/btn_to_edittext"
+            android:layout_width="200dp"
+            android:layout_height="64dp"
+            android:layout_below="@id/txtUrl"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:textSize="18sp"
+            android:background="@drawable/textview_radiuborder"
+            android:text="进入 EditText 的展示界面"/>
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

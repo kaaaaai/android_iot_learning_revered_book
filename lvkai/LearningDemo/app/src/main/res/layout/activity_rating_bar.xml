@@ -1,0 +1,66 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".RatingBarActivity"
+        android:gravity="center">
+
+    <RatingBar
+        android:id="@+id/rb_normal"
+        style="@style/roomRatingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"/>
+
+    <SeekBar
+        android:id="@+id/sb_normal"
+        android:layout_alignTop="@id/rb_normal"
+        android:layout_marginTop="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxHeight="5.0dp"
+        android:minHeight="5.0dp"
+        android:progressDrawable="@drawable/sb_bar"
+        android:thumb="@drawable/sb_thumb"/>
+
+    <TextView
+        android:id="@+id/textSb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/sb_normal"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:shadowColor="#F9F900"
+        android:shadowDx="10.0"
+        android:shadowDy="10.0"
+        android:shadowRadius="3.0"
+        android:text="我是一个用来监听的 TextView"
+        android:textColor="#4A4AFF"
+        android:textSize="30sp" />
+
+    <ToggleButton
+        android:id="@+id/tbtn_open"
+        android:layout_below="@id/textSb"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:textOff="关闭声音"
+        android:textOn="打开声音" />
+
+    <Switch
+        android:id="@+id/swh_status"
+        android:layout_below="@id/tbtn_open"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textOff=""
+        android:textOn=""
+        android:thumb="@drawable/thumb_selctor"
+        android:track="@drawable/track_selctor" />
+
+</RelativeLayout>

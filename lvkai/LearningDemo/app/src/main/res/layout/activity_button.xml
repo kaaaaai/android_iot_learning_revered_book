@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ButtonActivity"
+        android:gravity="center"
+        android:background="#8fffad">
+
+    <Button
+        android:id="@+id/btnOne"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="@color/colorPrimary"
+        android:layout_above="@+id/btnTwo"
+        android:text="按钮"/>
+
+
+    <Button
+        android:id="@+id/btnTwo"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_centerInParent="true"
+        android:text="按钮不可用"/>
+
+    <Button
+        android:id="@+id/btnThree"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_below="@+id/btnTwo"
+        android:text="下个页面-ImageView"/>
+
+
+
+</RelativeLayout>
