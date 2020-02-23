@@ -6,11 +6,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 
-import com.example.learningdemo.listView.UIModules;
-import com.example.learningdemo.listView.UIModulesAdapter;
+import com.example.learningdemo.listviewupdate.ListviewUpdateActivity;
+import com.example.learningdemo.listviewupdate.MultiListActivity;
+import com.example.learningdemo.manactivitylist.UIModules;
+import com.example.learningdemo.manactivitylist.UIModulesAdapter;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -28,8 +29,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         initData();
-
-
     }
 
     void initData() {
@@ -43,6 +42,11 @@ public class MainActivity extends AppCompatActivity {
         mUIMoudles.add(new UIModules("Button"));
         mUIMoudles.add(new UIModules("ImageView/ProgressBar/Data & Time组件"));
         mUIMoudles.add(new UIModules("RatingBarView/SeekBarView/Switch/ToggleButton"));
+        mUIMoudles.add(new UIModules("ListView 数据更新问题"));
+        mUIMoudles.add(new UIModules("ListView 多布局"));
+        mUIMoudles.add(new UIModules("GridView "));
+        mUIMoudles.add(new UIModules("Spinner 下拉多选框 "));
+
 
         mAdapter = new UIModulesAdapter((LinkedList<UIModules>)mUIMoudles, mContext);
         list_uimodules.setAdapter(mAdapter);
@@ -65,6 +69,18 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case 4:
                         startActivity(new Intent(MainActivity.this, RatingBarActivity.class));
+                        break;
+                    case  5:
+                        startActivity(new Intent(MainActivity.this, ListviewUpdateActivity.class));
+                        break;
+                    case  6:
+                        startActivity(new Intent(MainActivity.this, MultiListActivity.class));
+                        break;
+                    case  7:
+                        startActivity(new Intent(MainActivity.this, GridViewActivity.class));
+                        break;
+                    case  8:
+                        startActivity(new Intent(MainActivity.this, SpinnerActivity.class));
                         break;
                 }
             }

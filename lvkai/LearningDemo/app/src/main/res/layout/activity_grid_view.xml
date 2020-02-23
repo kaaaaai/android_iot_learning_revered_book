@@ -1,19 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:gravity="center">
+    android:padding="5dp"
+    tools:context=".GridViewActivity">
 
-    <ListView
-        android:id="@+id/list_view"
+    <!--numColumns设置每行显示多少个-->
+    <GridView
+        android:id="@+id/grid_photo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="0dp"
-        android:focusable="false"
-        />
-
+        android:numColumns="3" />
 
 </RelativeLayout>

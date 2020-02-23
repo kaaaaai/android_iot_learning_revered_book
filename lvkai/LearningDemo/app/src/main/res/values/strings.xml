@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">LearningDemo</string>
+    <item name="Tag_POKEMON" type="id"></item>
+    <item name="Tag_SOLIDER" type="id"></item>
+
+    <string name="spin_title">分段选择</string>
+
 </resources>

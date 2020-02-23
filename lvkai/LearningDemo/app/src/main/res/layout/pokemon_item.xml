@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/img_icon"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:src="@mipmap/pokemonpika" />
+
+
+    <TextView
+        android:id="@+id/text_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="皮卡丘"
+        android:textColor="#F3684A"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/text_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:text="一隻電氣鼠，全身的皮毛都是黃色的。牠的耳朵很長，尖端是黑色的。牠有小小的嘴巴，以及黑色的眼睛。牠的臉頰上有兩個紅色的圓形電氣囊。牠的前爪短而粗，有五個「手指」，後爪則只有三個。牠背上有兩條褐色的條紋。尾巴是像鋸齒狀的閃電，與身體相接的部分也有一片褐色的皮毛。確切地來說皮卡丘是一隻老鼠，牠跑動的時候是用四條腿著地快速地奔跑，但是更多時候牠是站立著的並用兩隻後腳走路。"
+        android:textColor="#44BDED"
+        android:textSize="18sp" />
+
+</LinearLayout>

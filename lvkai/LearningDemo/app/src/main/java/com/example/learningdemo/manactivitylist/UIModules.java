@@ -1,4 +1,4 @@
-package com.example.learningdemo.listView;
+package com.example.learningdemo.manactivitylist;
 
 public class UIModules {
     private String uiName;

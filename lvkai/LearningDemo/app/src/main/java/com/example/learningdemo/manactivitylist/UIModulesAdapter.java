@@ -1,4 +1,4 @@
-package com.example.learningdemo.listView;
+package com.example.learningdemo.manactivitylist;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -39,11 +39,28 @@ public class UIModulesAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        convertView = LayoutInflater.from(mContext).inflate(R.layout.uimodules_item,parent,false);
-        ImageView img_icon = (ImageView) convertView.findViewById(R.id.iv_uimodules);
-        TextView txt_aName = (TextView) convertView.findViewById(R.id.tv_uimodules);
-//        img_icon.setBackgroundResource(mData.get(position).getaIcon());
-        txt_aName.setText(mModules.get(position).getUiName());
+
+        ViewHolder holder = null;
+        //2.4.6 BaseAdapter优化 1.复用ConvertView
+        if (convertView == null){
+            convertView = LayoutInflater.from(mContext).inflate(R.layout.uimodules_item,parent,false);
+
+            holder = new ViewHolder();
+            holder.text_Name =  (TextView) convertView.findViewById(R.id.tv_uimodules);
+            holder.img_icon = (ImageView) convertView.findViewById(R.id.iv_uimodules);
+        }else{
+            holder = (ViewHolder) convertView.getTag();
+        }
+
+
+        holder.text_Name.setText(mModules.get(position).getUiName());
         return convertView;
     }
+
+    //2.ViewHolder 重用组件
+    static class  ViewHolder{
+        ImageView img_icon;
+        TextView text_Name;
+    }
 }
+
