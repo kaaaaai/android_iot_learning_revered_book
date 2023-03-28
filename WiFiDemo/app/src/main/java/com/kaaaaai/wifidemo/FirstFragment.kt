@@ -76,6 +76,8 @@ class FirstFragment : Fragment() {
     }
 
     private fun initView() {
+        requireActivity().title = "Scan WiFi"
+
         wifiScanListAdapter = WifiScanListAdpter(arrayList)
 
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -156,8 +158,14 @@ class FirstFragment : Fragment() {
 
                 val frequency = scanResult.frequency
                 val channel = getChannelFromFrequency(frequency)
-                arrayList.add("名称：" + scanResult.SSID + "信道" + channel)
-                wifiScanListAdapter!!.notifyDataSetChanged()
+                Log.d("WIFIScannerActivity","当前信道"+channel)
+                var itemStr = "名称：" + (scanResult.SSID ?: "unKnown") + " " + "信道：" + channel
+                if (!arrayList.contains(itemStr)) {
+                    arrayList.add(itemStr)
+                    wifiScanListAdapter!!.notifyDataSetChanged()
+
+                    binding.textviewFirst.text = "${arrayList.count()} ssid"
+                }
             }
         }
 
