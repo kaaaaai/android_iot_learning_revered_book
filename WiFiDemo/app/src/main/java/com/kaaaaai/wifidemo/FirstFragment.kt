@@ -10,21 +10,26 @@ import android.net.wifi.ScanResult
 import android.net.wifi.WifiManager
 import android.os.Build
 import android.os.Bundle
+import android.os.CountDownTimer
+import android.os.Handler
+import android.os.Looper
+import android.app.Activity
+import android.text.method.ScrollingMovementMethod
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.kaaaaai.wifidemo.databinding.FragmentFirstBinding
 import com.kaaaaai.wifidemo.utils.WifiScanListAdpter
-import kotlin.math.log
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -43,6 +48,50 @@ class FirstFragment : Fragment() {
     private var results: List<ScanResult>? = null
 
     private var arrayList = ArrayList<String>()
+
+    private var timer: Timer? = null
+    private var count = 0
+
+    private var channelMaps = mutableMapOf<Int, MutableList<String>>()
+
+    private val TAG = "🐼 Wifi Scan"
+    fun startWiFiTimer() {
+//        timer = Timer()
+//        timer?.schedule(object : TimerTask() {
+//            override fun run() {
+//                if (count < 10) {
+//                    // 每五秒执行一次方法
+//                    scanWiFi()
+//                    count++
+//                } else {
+//                    // 取消定时器
+//                    timer?.cancel()
+//                    timer = null
+//                }
+//            }
+//        }, 0, 5000)
+
+        channelMaps = mutableMapOf<Int, MutableList<String>>()
+
+        val timer = object: CountDownTimer(25000, 5000) {
+            override fun onTick(millisUntilFinished: Long) {
+                scanWiFi()
+            }
+
+            override fun onFinish() {
+                count = 0
+                for ((key, value) in channelMaps) {
+                    val count = value.count()
+                    Log.i("🐼", "onFinish: $key-$count")
+                    addLog(TAG,"onFinish: $key-$count")
+                }
+                Log.i("🐼", "onFinish: timer")
+                addLog(TAG,"onFinish: onFinish: timer")
+
+            }
+        }
+        timer.start()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -71,7 +120,8 @@ class FirstFragment : Fragment() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 100)
         } else {
-            scanWiFi()
+//            scanWiFi()
+            startWiFiTimer()
         }
     }
 
@@ -88,39 +138,23 @@ class FirstFragment : Fragment() {
         }
 
         binding.buttonScan.setOnClickListener {
-            scanWiFi()
+//            scanWiFi()
+            startWiFiTimer()
         }
+        binding.textLog.movementMethod = ScrollingMovementMethod()
     }
 
     private fun scanWiFi() {
-        arrayList.clear()
-        wifiScanListAdapter!!.notifyDataSetChanged()
-
+        addLog(TAG,"---------- 分割线 ----------")
+        Log.d("🐼 WIFIScannerActivity","---------- 分割线 ----------")
+        count += 1
         requireActivity().registerReceiver(wifiReceiver, IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION))
         wifiManager!!.startScan()
-        Toast.makeText(requireActivity(), "Scanning WiFi ...", Toast.LENGTH_SHORT).show()
 
-//        val channelList = mutableListOf<Int>()
-//        val channelHistogram = wifiScanner.channelHistogram
+//        arrayList.clear()
+//        wifiScanListAdapter!!.notifyDataSetChanged()
 //
-//        for (i in 0 until channelHistogram.size) {
-//            val numAps = channelHistogram[i]
-//            if (numAps > 0) {
-//                val channel = i + 1
-//                channelList.add(channel)
-//                Log.d(TAG, "Channel $channel has $numAps APs")
-//            }
-//        }
-//
-//        for (channel in channelList) {
-//            val accessPoints = wifiScanner.getScanResultsFromChannel(channel)
-//            for (accessPoint in accessPoints) {
-//                val ssid = accessPoint.SSID
-//                val bssid = accessPoint.BSSID
-//                val level = accessPoint.level
-//                Log.d(TAG, "SSID: $ssid, BSSID: $bssid, Level: $level")
-//            }
-//        }
+//        Toast.makeText(requireActivity(), "Scanning WiFi ...", Toast.LENGTH_SHORT).show()
     }
 
     private val wifiReceiver = object : BroadcastReceiver() {
@@ -140,7 +174,7 @@ class FirstFragment : Fragment() {
             for (scanResult in results!!) {
                 var wifi_ssid = ""
                 wifi_ssid = scanResult.SSID
-                Log.d("WIFIScannerActivity", "WIFI SSID: $wifi_ssid")
+//                Log.d("WIFIScannerActivity", "WIFI SSID: $wifi_ssid")
 
                 var wifi_ssid_first_nine_characters = ""
 
@@ -149,16 +183,20 @@ class FirstFragment : Fragment() {
                 } else {
                     wifi_ssid_first_nine_characters = wifi_ssid
                 }
-                Log.d("WIFIScannerActivity", "WIFI SSID 9: $wifi_ssid_first_nine_characters")
+//                Log.d("WIFIScannerActivity", "WIFI SSID 9: $wifi_ssid_first_nine_characters")
 
-                Log.d(
-                    "WIFIScannerActivity",
-                    "scanResult.SSID: " + scanResult.SSID + ", scanResult.capabilities: " + scanResult.capabilities
-                )
+//                Log.d("WIFIScannerActivity", "scanResult.SSID: " + scanResult.SSID + ", scanResult.capabilities: " + scanResult.capabilities)
 
                 val frequency = scanResult.frequency
                 val channel = getChannelFromFrequency(frequency)
-                Log.d("WIFIScannerActivity","当前信道"+channel)
+//                Log.d("🐼 WIFIScannerActivity","当前信道"+channel)
+
+                if (channel in 0..12) {
+                    addLog("$TAG 第 $count 轮"," SSID: ${scanResult.SSID} 信道：$channel")
+                    Log.i("🐼 第" + "$count" + "轮", "SSID: " + scanResult.SSID + " 信道：" + channel)
+                    channelMaps.getOrPut(channel) { mutableListOf() }.add(scanResult.BSSID)
+                }
+
                 var itemStr = "名称：" + (scanResult.SSID ?: "unKnown") + " " + "信道：" + channel
                 if (!arrayList.contains(itemStr)) {
                     arrayList.add(itemStr)
@@ -178,10 +216,27 @@ class FirstFragment : Fragment() {
         }
     }
 
+    private val dateFormat = SimpleDateFormat("HH:mm:ss.SSS", Locale.getDefault())
+
+    private fun addLog(log: String, s: String) {
+        var log = log
+        log = dateFormat.format(Date()) + " " + log + "$s \n"
+        Log.i(TAG, "addLog: $log")
+        log += "${binding.textLog.text}".trimIndent()
+
+        if (log.length > 1 shl 13) {
+            //8192
+            log = log.substring(0, 1 shl 13)
+        }
+        val finalLog = log
+
+        requireActivity().runOnUiThread{ binding.textLog.text = finalLog }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
 
-        requireActivity().unregisterReceiver(wifiReceiver)
+//        requireActivity().unregisterReceiver(wifiReceiver)
     }
 }
